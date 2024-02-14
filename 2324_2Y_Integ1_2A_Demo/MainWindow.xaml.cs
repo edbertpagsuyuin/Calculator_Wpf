@@ -11,6 +11,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
@@ -22,9 +23,10 @@ namespace _2324_2Y_Integ1_2A_Demo
     public partial class MainWindow : Window
     {
         Button[] btnNums = new Button[10];
-        int num1 = 0;
-        int num2 = 0;
+        float num1 = 0;
+        float num2 = 0;
         int ope = -1;
+        bool deci = false;
 
         public MainWindow()
         {
@@ -49,11 +51,21 @@ namespace _2324_2Y_Integ1_2A_Demo
             btnMult.Content = "x";
             btnDiv.Content = "/";
             btnEnter.Content = "=";
+            btnSqrt.Content = "√";
+            btnPow.Content = "^";
+            btnClear.Content = "C";
+            btnFloat.Content = ".";
         }
 
         private void numberEnter(int x)
         {
+            
             string input = tbCalc.Text;
+            if (x == -1)
+            {
+                input += ".";
+                deci = true;
+            }
             input += x;
 
             if(input.Length > 5 )
@@ -133,25 +145,44 @@ namespace _2324_2Y_Integ1_2A_Demo
         {
             ope = 0;
             tbCalc.Text = "";
+            btnOpeColor();
         }
 
         private void btnMin_Click(object sender, RoutedEventArgs e)
         {
             ope = 1;
             tbCalc.Text = "";
+            btnOpeColor();
         }
 
         private void btnMult_Click(object sender, RoutedEventArgs e)
         {
             ope = 2;
             tbCalc.Text = "";
+            btnOpeColor();
         }
 
         private void btnDiv_Click(object sender, RoutedEventArgs e)
         {
             ope = 3;
             tbCalc.Text = "";
-        } 
+            btnOpeColor();
+        }
+
+        private void btnSqrt_Click(object sender, RoutedEventArgs e)
+        {
+            ope = 4;
+            tbCalc.Text = "";
+            btnOpeColor();
+        }
+
+        private void btnPow_Click(object sender, RoutedEventArgs e)
+        {
+            ope = 5;
+            tbCalc.Text = "";
+            btnOpeColor();
+        }
+
         #endregion
 
         private void btnEnter_Click(object sender, RoutedEventArgs e)
@@ -170,6 +201,12 @@ namespace _2324_2Y_Integ1_2A_Demo
                 case 3:
                     num1 /= num2;
                     break;
+                case 4:
+                    num1 = (float)Math.Sqrt(num1); 
+                    break;
+                case 5:
+                    num1 = (float)Math.Pow(num1, num2);
+                    break;
             }
             
             if(ope > -1)
@@ -177,7 +214,55 @@ namespace _2324_2Y_Integ1_2A_Demo
                 tbCalc.Text = num1.ToString();
                 ope = -1;
                 num2 = 0;
+                btnOpeColor();
             }
+        }
+
+        private void btnOpeColor()
+        {
+            btnAdd.Background = Brushes.LightGray;
+            btnMin.Background = Brushes.LightGray;
+            btnMult.Background = Brushes.LightGray;
+            btnDiv.Background = Brushes.LightGray;
+            btnSqrt.Background = Brushes.LightGray;
+            btnPow.Background = Brushes.LightGray;
+
+            switch (ope) 
+            {
+                case 0:
+                    btnAdd.Background = Brushes.LightGreen;
+                    break;
+                case 1:
+                    btnMin.Background = Brushes.LightGreen;
+                    break;
+                case 2:
+                    btnMult.Background = Brushes.LightGreen;
+                    break;
+                case 3:
+                    btnDiv.Background = Brushes.LightGreen;
+                    break;
+                case 4:
+                    btnSqrt.Background = Brushes.LightGreen;
+                    break;
+                case 5:
+                    btnPow.Background = Brushes.LightGreen;
+                    break;
+            }
+
+        }
+
+        private void btnClear_Click(object sender, RoutedEventArgs e)
+        {
+            tbCalc.Text = "";
+            num1 = 0;
+            num2 = 0;
+            ope = -1;
+            btnOpeColor();
+        }
+
+        private void btnFloat_Click(object sender, RoutedEventArgs e)
+        {
+            deci = true;
         }
     }
 }
