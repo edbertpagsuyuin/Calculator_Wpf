@@ -26,7 +26,7 @@ namespace _2324_2Y_Integ1_2A_Demo
         float num1 = 0;
         float num2 = 0;
         int ope = -1;
-        bool deci = false;
+        bool isclear = false;
 
         public MainWindow()
         {
@@ -54,27 +54,29 @@ namespace _2324_2Y_Integ1_2A_Demo
             btnSqrt.Content = "√";
             btnPow.Content = "^";
             btnClear.Content = "C";
+            btnFactorial.Content = "!";
             btnFloat.Content = ".";
         }
 
         private void numberEnter(int x)
         {
-            
+            if (isclear)
+                Clear();
+
             string input = tbCalc.Text;
-            if (x == -1)
-            {
-                input += ".";
-                deci = true;
-            }
             input += x;
 
-            if(input.Length > 5 )
+            if (input.Length > 12)
                 input = input.Substring(1);
 
             if (ope == -1)
-                num1 = int.Parse(input);
+            {
+                num1 = float.Parse(input);
+                isclear = false;
+            }
             else
-                num2 = int.Parse(input);
+                num2 = float.Parse(input);
+
 
             tbCalc.Text = input;
         }
@@ -145,66 +147,99 @@ namespace _2324_2Y_Integ1_2A_Demo
         {
             ope = 0;
             tbCalc.Text = "";
+            tbEqua.Text = $"{num1} +";
+            isclear = false;
             btnOpeColor();
         }
 
         private void btnMin_Click(object sender, RoutedEventArgs e)
         {
             ope = 1;
+            num2 = 0;
             tbCalc.Text = "";
+            tbEqua.Text = $"{num1} -";
+            isclear = false;
             btnOpeColor();
         }
 
         private void btnMult_Click(object sender, RoutedEventArgs e)
         {
             ope = 2;
+            num2 = 0;
             tbCalc.Text = "";
+            tbEqua.Text = $"{num1} x";
+            isclear = false;
             btnOpeColor();
         }
 
         private void btnDiv_Click(object sender, RoutedEventArgs e)
         {
             ope = 3;
+            num2 = 0;
             tbCalc.Text = "";
+            tbEqua.Text = $"{num1} /";
+            isclear = false;
             btnOpeColor();
         }
-
-        private void btnSqrt_Click(object sender, RoutedEventArgs e)
-        {
-            ope = 4;
-            tbCalc.Text = "";
-            btnOpeColor();
-        }
-
         private void btnPow_Click(object sender, RoutedEventArgs e)
         {
-            ope = 5;
+            ope = 4;
+            num2 = 0;
             tbCalc.Text = "";
+            tbEqua.Text = $"{num1} ^";
+            isclear = false;
             btnOpeColor();
+        }
+        private void btnSqrt_Click(object sender, RoutedEventArgs e)
+        {
+            isclear = true;
+            tbEqua.Text = $"√{num1}";
+            num1 = (float)Math.Sqrt(num1);
+            tbCalc.Text = num1.ToString();
+        }
+
+        private void btnFactorial_Click(object sender, RoutedEventArgs e)
+        {
+            isclear = true;
+            tbEqua.Text = $"{num1}!";
+            int temp = 1;
+            for (int i = (int)num1; i > 0; i--)
+                temp *= i;
+            num1 = temp;
+            tbCalc.Text = num1.ToString();
+        }
+
+        private void btnFloat_Click(object sender, RoutedEventArgs e)
+        {
+            if(!tbCalc.Text.Contains('.'))
+                tbCalc.Text += '.';
         }
 
         #endregion
 
         private void btnEnter_Click(object sender, RoutedEventArgs e)
         {
-            switch(ope)
+            tbEqua.Text = "";
+            switch (ope)
             {
                 case 0:
+                    tbEqua.Text = $"{num1} + {num2} =";
                     num1 += num2;
                     break;
                 case 1:
+                    tbEqua.Text = $"{num1} - {num2} =";
                     num1 -= num2;
                     break;
                 case 2:
+                    tbEqua.Text = $"{num1} x {num2} =";
                     num1 *= num2;
                     break;
                 case 3:
+                    tbEqua.Text = $"{num1} / {num2} =";
                     num1 /= num2;
                     break;
                 case 4:
-                    num1 = (float)Math.Sqrt(num1); 
-                    break;
-                case 5:
+                    tbEqua.Text = $"{num1} ^ {num2} =";
                     num1 = (float)Math.Pow(num1, num2);
                     break;
             }
@@ -212,8 +247,9 @@ namespace _2324_2Y_Integ1_2A_Demo
             if(ope > -1)
             {
                 tbCalc.Text = num1.ToString();
-                ope = -1;
-                num2 = 0;
+                isclear = true;
+                //ope = -1;
+                //num2 = 0;
                 btnOpeColor();
             }
         }
@@ -224,7 +260,6 @@ namespace _2324_2Y_Integ1_2A_Demo
             btnMin.Background = Brushes.LightGray;
             btnMult.Background = Brushes.LightGray;
             btnDiv.Background = Brushes.LightGray;
-            btnSqrt.Background = Brushes.LightGray;
             btnPow.Background = Brushes.LightGray;
 
             switch (ope) 
@@ -242,9 +277,6 @@ namespace _2324_2Y_Integ1_2A_Demo
                     btnDiv.Background = Brushes.LightGreen;
                     break;
                 case 4:
-                    btnSqrt.Background = Brushes.LightGreen;
-                    break;
-                case 5:
                     btnPow.Background = Brushes.LightGreen;
                     break;
             }
@@ -253,16 +285,18 @@ namespace _2324_2Y_Integ1_2A_Demo
 
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
+            Clear();
+        }
+
+        private void Clear()
+        {
             tbCalc.Text = "";
+            tbEqua.Text = "";
             num1 = 0;
             num2 = 0;
             ope = -1;
             btnOpeColor();
         }
-
-        private void btnFloat_Click(object sender, RoutedEventArgs e)
-        {
-            deci = true;
-        }
+       
     }
 }
