@@ -211,8 +211,14 @@ namespace _2324_2Y_Integ1_2A_Demo
 
         private void btnFloat_Click(object sender, RoutedEventArgs e)
         {
-            if(!tbCalc.Text.Contains('.'))
+            if(!tbCalc.Text.Contains('.') && !isclear)
                 tbCalc.Text += '.';
+            else
+            {
+                Clear();
+                isclear = false;
+                tbCalc.Text += '.';
+            }
         }
 
         #endregion

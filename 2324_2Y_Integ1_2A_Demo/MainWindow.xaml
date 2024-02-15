@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_2324_2Y_Integ1_2A_Demo"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="My Calcuator Buddy :)" Height="460" Width="300">
     <Grid>
+        <Rectangle HorizontalAlignment="Left" Height="401" Margin="12,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="258" Fill="#FF373434"/>
         <Button x:Name="btn9" Content="X" HorizontalAlignment="Left" Margin="32,178,0,0" VerticalAlignment="Top" 
         Width="50" Height="50" FontSize="28" FontWeight="Bold" Click="btn9_Click"/>
         <Button x:Name="btn8" Content="X" HorizontalAlignment="Left" Margin="87,178,0,0" VerticalAlignment="Top" 
