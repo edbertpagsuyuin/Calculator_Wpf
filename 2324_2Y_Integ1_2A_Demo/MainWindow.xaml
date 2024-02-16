@@ -42,8 +42,8 @@
             Width="50" Height="50" FontSize="28" FontWeight="Bold" Click="btnSqrt_Click"/>
         <Button x:Name="btnPow" Content="X" HorizontalAlignment="Left" Margin="32,123,0,0" VerticalAlignment="Top" 
             Width="50" Height="50" FontSize="28" FontWeight="Bold" Click="btnPow_Click"/>
-        <Button x:Name="btnFloat" Content="X" HorizontalAlignment="Left" Margin="32,343,0,0" VerticalAlignment="Top" 
-            Width="50" Height="50" FontSize="28" FontWeight="Bold" Click="btnFloat_Click"/>
+        <Button x:Name="btnDecimalPoint" Content="X" HorizontalAlignment="Left" Margin="32,343,0,0" VerticalAlignment="Top" 
+            Width="50" Height="50" FontSize="28" FontWeight="Bold" Click="btnDecimalPoint_Click"/>
         <Button x:Name="btnClear" Content="X" HorizontalAlignment="Left" Margin="197,123,0,0" VerticalAlignment="Top" 
             Width="50" Height="50" FontSize="28" FontWeight="Bold" Click="btnClear_Click"/>
         <Button x:Name="btnFactorial" Content="X" HorizontalAlignment="Left" Margin="142,123,0,0" VerticalAlignment="Top" 

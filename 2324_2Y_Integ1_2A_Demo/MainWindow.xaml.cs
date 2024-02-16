@@ -55,7 +55,7 @@ namespace _2324_2Y_Integ1_2A_Demo
             btnPow.Content = "^";
             btnClear.Content = "C";
             btnFactorial.Content = "!";
-            btnFloat.Content = ".";
+            btnDecimalPoint.Content = ".";
         }
 
         private void numberEnter(int x)
