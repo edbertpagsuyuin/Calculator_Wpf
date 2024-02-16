@@ -56,6 +56,8 @@ namespace _2324_2Y_Integ1_2A_Demo
             btnClear.Content = "C";
             btnFactorial.Content = "!";
             btnDecimalPoint.Content = ".";
+
+            btnEnter.Background = Brushes.IndianRed;
         }
 
         private void numberEnter(int x)
@@ -209,11 +211,11 @@ namespace _2324_2Y_Integ1_2A_Demo
             tbCalc.Text = num1.ToString();
         }
 
-        private void btnFloat_Click(object sender, RoutedEventArgs e)
+        private void btnDecimalPoint_Click(object sender, RoutedEventArgs e)
         {
             if(!tbCalc.Text.Contains('.') && !isclear)
                 tbCalc.Text += '.';
-            else
+            else if (isclear)
             {
                 Clear();
                 isclear = false;
